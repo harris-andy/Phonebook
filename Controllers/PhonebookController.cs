@@ -5,7 +5,6 @@ public class PhonebookController
     private readonly DisplayData _displayData;
     private readonly UserInput _userInput;
     private readonly ContactsDataManager _dataManager;
-
     private readonly CategoryDataManager _categoryDataManager;
 
     public PhonebookController(DisplayData displayData, UserInput userInput, ContactsDataManager dataManager, CategoryDataManager categoryDataManager)
@@ -70,6 +69,9 @@ public class PhonebookController
         contact.Name = _userInput.GetName("contact");
         contact.Email = _userInput.GetEmail();
         contact.PhoneNumber = _userInput.GetPhoneNumber();
+        List<Category> categories = CategoryDataManager.GetCategories();
+        if (categories.Count() == 0)
+            AddCategory();
         contact.CategoryId = _userInput.GetCategory().CategoryId;
 
 
@@ -157,11 +159,8 @@ public class PhonebookController
 
     internal void UpdateCategory()
     {
-        // List<Category> categories = CategoryDataManager.GetCategories();
-        // _displayData.ShowCategories(categories);
         Category category = _userInput.GetCategory();
         category.Name = _userInput.GetName("new category");
         CategoryDataManager.UpdateCategory(category);
-
     }
 }

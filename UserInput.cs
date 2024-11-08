@@ -122,12 +122,13 @@ public class UserInput
     {
         Console.Clear();
         List<Category> categories = CategoryDataManager.GetCategories();
+        if (categories.Count() == 1)
+            return categories.First();
         Category category = AnsiConsole.Prompt(
             new SelectionPrompt<Category>()
                 .Title("Choose a category: ")
                 .UseConverter(category => category.Name)
                 .AddChoices(categories));
-
         return category;
     }
 
