@@ -39,9 +39,9 @@ public class UserInput
         return menuChoice;
     }
 
-    public string GetName()
+    public string GetName(string type)
     {
-        return AnsiConsole.Ask<string>("Enter name: ");
+        return AnsiConsole.Ask<string>($"Enter {type} name: ");
     }
 
     public string GetEmail()

@@ -6,8 +6,10 @@ internal class Program
     {
         UserInput userInput = new UserInput();
         DisplayData displayData = new DisplayData();
-        DataManager dataManager = new DataManager();
-        PhonebookController phonebookController = new PhonebookController(displayData, userInput, dataManager);
+        ContactsDataManager dataManager = new ContactsDataManager();
+        CategoryDataManager categoryDataManager = new CategoryDataManager();
+        PhonebookController phonebookController = new PhonebookController(displayData, userInput, dataManager, categoryDataManager);
+        // CategoryController categoryController = new CategoryController(displayData, userInput, categoryDataManager);
 
         phonebookController.ShowMainMenu();
     }

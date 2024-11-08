@@ -1,19 +1,19 @@
-using System.ComponentModel.DataAnnotations;
-using PhoneNumbers;
-
 namespace Phonebook;
 
 public class PhonebookController
 {
     private readonly DisplayData _displayData;
     private readonly UserInput _userInput;
-    private readonly DataManager _dataManager;
+    private readonly ContactsDataManager _dataManager;
 
-    public PhonebookController(DisplayData displayData, UserInput userInput, DataManager dataManager)
+    private readonly CategoryDataManager _categoryDataManager;
+
+    public PhonebookController(DisplayData displayData, UserInput userInput, ContactsDataManager dataManager, CategoryDataManager categoryDataManager)
     {
         _displayData = displayData;
         _userInput = userInput;
         _dataManager = dataManager;
+        _categoryDataManager = categoryDataManager;
     }
 
     internal void ShowMainMenu()
@@ -42,7 +42,7 @@ public class PhonebookController
                     ViewRecords();
                     break;
                 case 5:
-                    // ViewStudySessions();
+                    AddCategory();
                     break;
                 case 6:
                     // StudyReport("counts");
@@ -66,7 +66,7 @@ public class PhonebookController
 
     private void AddContact()
     {
-        string name = _userInput.GetName();
+        string name = _userInput.GetName("contact");
         string email = _userInput.GetEmail();
         string countryCode = _userInput.GetCountryCode();
         string phoneNumber = _userInput.GetPhoneNumber();
@@ -92,7 +92,6 @@ public class PhonebookController
         string deleteMessage = "Are you sure you want to delete this contact?";
         if (_userInput.GetConfirmation(deleteMessage))
             _dataManager.DeleteContact(chosenOne);
-
     }
 
     private void ViewRecords()
@@ -117,7 +116,7 @@ public class PhonebookController
             Action performAction = updateChoice switch
             {
                 0 => () => ShowMainMenu(),
-                1 => () => chosenOne.Name = _userInput.GetName(),
+                1 => () => chosenOne.Name = _userInput.GetName("contact"),
                 2 => () => chosenOne.PhoneNumber = _userInput.GetPhoneNumber(),
                 3 => () => chosenOne.Email = _userInput.GetEmail(),
                 4 => () =>
@@ -131,9 +130,16 @@ public class PhonebookController
             };
             performAction();
         } while (updateChoice != 0);
+    }
 
-        // Contact updatedContact = _userInput.GetUpdatedContact(chosenOne);
-        // if (_userInput.BackToMainMenu()) ShowMainMenu();
-        // _dataManager.UpdateContact(updatedContact);
+    // Contact updatedContact = _userInput.GetUpdatedContact(chosenOne);
+    // if (_userInput.BackToMainMenu()) ShowMainMenu();
+    // _dataManager.UpdateContact(updatedContact);
+
+    internal void AddCategory()
+    {
+        Category category = new Category();
+        category.Name = _userInput.GetName("category");
+        _categoryDataManager.AddCategory(category);
     }
 }
