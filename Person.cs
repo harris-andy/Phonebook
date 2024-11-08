@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
@@ -9,6 +11,7 @@ namespace Phonebook;
 
 // public class Category
 // {
+//     [Key]
 //     public int CategoryId { get; set; }
 
 //     public List<Person> Persons { get; } = new();
@@ -17,17 +20,18 @@ namespace Phonebook;
 [Index(nameof(Name), IsUnique = true)]
 public class Person
 {
+    [Key]
     public int PersonId { get; set; }
 
+    [Required]
     public string Name { get; set; } = string.Empty;
 
     public string Email { get; set; } = string.Empty;
 
     public string PhoneNumber { get; set; } = string.Empty;
 
-    // public string Category { get; set; } = string.Empty;
+    public int CategoryId { get; set; }
 
-    // public int CategoryId { get; set; }
-
-    // public Category Category { get; set; } = new();
+    [ForeignKey(nameof(CategoryId))]
+    public Category Category { get; set; } = new();
 }
