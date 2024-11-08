@@ -51,7 +51,7 @@ public class PhonebookController
                     DeleteCategory();
                     break;
                 case 8:
-                    // AddFakeData();
+                    UpdateCategory();
                     break;
                 case 9:
                     // AddFakeStudySessions();
@@ -70,7 +70,7 @@ public class PhonebookController
         contact.Name = _userInput.GetName("contact");
         contact.Email = _userInput.GetEmail();
         contact.PhoneNumber = _userInput.GetPhoneNumber();
-        contact.CategoryId = _userInput.GetCategoryId();
+        contact.CategoryId = _userInput.GetCategory().CategoryId;
 
 
         // using var db = new ContactsContext();
@@ -144,7 +144,7 @@ public class PhonebookController
 
     internal void DeleteCategory()
     {
-        int categoryId = _userInput.GetCategoryId();
+        int categoryId = _userInput.GetCategory().CategoryId;
         CategoryDataManager.RemoveCategory(categoryId);
     }
 
@@ -153,5 +153,15 @@ public class PhonebookController
         List<Category> categories = CategoryDataManager.GetCategories();
         _displayData.ShowCategories(categories);
         _userInput.PressToContinue();
+    }
+
+    internal void UpdateCategory()
+    {
+        // List<Category> categories = CategoryDataManager.GetCategories();
+        // _displayData.ShowCategories(categories);
+        Category category = _userInput.GetCategory();
+        category.Name = _userInput.GetName("new category");
+        CategoryDataManager.UpdateCategory(category);
+
     }
 }

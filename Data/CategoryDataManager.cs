@@ -21,4 +21,11 @@ public class CategoryDataManager
         db.Remove(new Category { CategoryId = categoryId });
         db.SaveChanges();
     }
+
+    internal static void UpdateCategory(Category category)
+    {
+        using var db = new PhonebookContext();
+        db.Update(category);
+        db.SaveChanges();
+    }
 }

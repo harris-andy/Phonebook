@@ -35,7 +35,8 @@ public class UserInput
                     "4 - View Entries",
                     "5 - Add Category",
                     "6 - View Categories",
-                    "7 - Delete Category"
+                    "7 - Delete Category",
+                    "8 - Update Category"
                 ));
         int menuChoice = int.Parse(choice.Split('-')[0].Trim());
 
@@ -117,17 +118,17 @@ public class UserInput
         return chosenContact;
     }
 
-    internal int GetCategoryId()
+    internal Category GetCategory()
     {
         Console.Clear();
         List<Category> categories = CategoryDataManager.GetCategories();
         Category category = AnsiConsole.Prompt(
             new SelectionPrompt<Category>()
-                .Title("Choose a category to assign")
+                .Title("Choose a category: ")
                 .UseConverter(category => category.Name)
                 .AddChoices(categories));
 
-        return category.CategoryId;
+        return category;
     }
 
     // internal Contact GetUpdatedContact(Contact contact)
