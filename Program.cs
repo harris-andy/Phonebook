@@ -1,5 +1,12 @@
 ﻿using Phonebook;
 
+
+/*
+    TO DO:
+    - option to create a new category if one doesn't exist
+*/
+
+
 internal class Program
 {
     private static void Main(string[] args)

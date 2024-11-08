@@ -2,14 +2,14 @@ namespace Phonebook;
 
 public class CategoryDataManager
 {
-    internal void AddCategory(Category category)
+    internal static void AddCategory(Category category)
     {
         using var db = new PhonebookContext();
         db.Add(category);
         db.SaveChanges();
     }
 
-    internal List<Category> GetCategories()
+    internal static List<Category> GetCategories()
     {
         using var db = new PhonebookContext();
         return db.Categories.ToList();

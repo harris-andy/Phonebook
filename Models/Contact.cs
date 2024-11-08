@@ -33,5 +33,5 @@ public class Contact
     public int CategoryId { get; set; }
 
     [ForeignKey(nameof(CategoryId))]
-    public Category Category { get; set; } = new();
+    public virtual Category Category { get; set; } = default!;
 }

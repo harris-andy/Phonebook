@@ -1,11 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Phonebook;
 
 public class ContactsDataManager
 {
-    internal List<Contact> GetEntries()
+    internal List<Contact> GetContacts()
     {
         using var db = new PhonebookContext();
-        return db.Contacts.ToList();
+        return db.Contacts.Include(c => c.Category).ToList();
     }
 
     internal void AddNewContact(Contact contact)

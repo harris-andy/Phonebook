@@ -66,22 +66,24 @@ public class PhonebookController
 
     private void AddContact()
     {
-        string name = _userInput.GetName("contact");
-        string email = _userInput.GetEmail();
-        string countryCode = _userInput.GetCountryCode();
-        string phoneNumber = _userInput.GetPhoneNumber();
+        Contact contact = new Contact();
+        contact.Name = _userInput.GetName("contact");
+        contact.Email = _userInput.GetEmail();
+        contact.PhoneNumber = _userInput.GetPhoneNumber();
+        contact.CategoryId = _userInput.GetCategoryId();
+
 
         // using var db = new ContactsContext();
         // db.Add(new Contact { Name = name, Email = email, PhoneNumber = phoneNumber });
         // db.SaveChanges();
 
-        Contact contact = new Contact { Name = name, Email = email, PhoneNumber = phoneNumber };
+        // Contact contact = new Contact { Name = name, Email = email, PhoneNumber = phoneNumber };
         _dataManager.AddNewContact(contact);
     }
 
     private void DeleteContact()
     {
-        List<Contact> contacts = _dataManager.GetEntries();
+        List<Contact> contacts = _dataManager.GetContacts();
         // _displayData.ShowContacts(contacts);
         // _displayData.PressToContinue();
         string chooseMessage = "Choose contact to be elminated: ";
@@ -96,14 +98,14 @@ public class PhonebookController
 
     private void ViewContacts()
     {
-        List<Contact> contacts = _dataManager.GetEntries();
+        List<Contact> contacts = _dataManager.GetContacts();
         _displayData.ShowContacts(contacts);
         _userInput.PressToContinue();
     }
 
     private void UpdateContact()
     {
-        List<Contact> contacts = _dataManager.GetEntries();
+        List<Contact> contacts = _dataManager.GetContacts();
         string message = "Choose contact to update: ";
         Contact chosenOne = _userInput.GetContact(contacts, message);
         List<Contact> chosenList = new List<Contact> { chosenOne };
@@ -141,12 +143,18 @@ public class PhonebookController
     {
         Category category = new Category();
         category.Name = _userInput.GetName("category");
-        _categoryDataManager.AddCategory(category);
+        CategoryDataManager.AddCategory(category);
     }
 
-    private void ViewCategories()
+    // internal int GetCategoryId()
+    // {
+    //     List<Category> categories = CategoryDataManager.GetCategories();
+    //     return _userInput.GetCategoryId(categories);
+    // }
+
+    internal void ViewCategories()
     {
-        List<Category> categories = _categoryDataManager.GetCategories();
+        List<Category> categories = CategoryDataManager.GetCategories();
         _displayData.ShowCategories(categories);
         _userInput.PressToContinue();
     }

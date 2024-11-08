@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Phonebook;
 
@@ -16,5 +11,5 @@ public class Category
 
     public string Name { get; set; } = string.Empty;
 
-    public List<Contact> Contacts { get; } = new();
+    public List<Contact> Contacts { get; set; } = new();
 }

@@ -116,6 +116,19 @@ public class UserInput
         return chosenContact;
     }
 
+    internal int GetCategoryId()
+    {
+        Console.Clear();
+        List<Category> categories = CategoryDataManager.GetCategories();
+        Category category = AnsiConsole.Prompt(
+            new SelectionPrompt<Category>()
+                .Title("Choose a category to assign")
+                .UseConverter(category => category.Name)
+                .AddChoices(categories));
+
+        return category.CategoryId;
+    }
+
     // internal Contact GetUpdatedContact(Contact contact)
     // {
     //     contact.Name = AnsiConsole.Ask<string>($"Enter new name for {contact.Name}: ");
