@@ -39,13 +39,13 @@ public class PhonebookController
                     UpdateContact();
                     break;
                 case 4:
-                    ViewRecords();
+                    ViewContacts();
                     break;
                 case 5:
                     AddCategory();
                     break;
                 case 6:
-                    // StudyReport("counts");
+                    ViewCategories();
                     break;
                 case 7:
                     // StudyReport("grades");
@@ -94,7 +94,7 @@ public class PhonebookController
             _dataManager.DeleteContact(chosenOne);
     }
 
-    private void ViewRecords()
+    private void ViewContacts()
     {
         List<Contact> contacts = _dataManager.GetEntries();
         _displayData.ShowContacts(contacts);
@@ -119,7 +119,8 @@ public class PhonebookController
                 1 => () => chosenOne.Name = _userInput.GetName("contact"),
                 2 => () => chosenOne.PhoneNumber = _userInput.GetPhoneNumber(),
                 3 => () => chosenOne.Email = _userInput.GetEmail(),
-                4 => () =>
+                4 => () => chosenOne.Category.Name = _userInput.GetName("category"),
+                5 => () =>
                 {
                     _dataManager.UpdateContact(chosenOne);
                     Console.WriteLine($"\nChanges committed!\n");
@@ -141,5 +142,12 @@ public class PhonebookController
         Category category = new Category();
         category.Name = _userInput.GetName("category");
         _categoryDataManager.AddCategory(category);
+    }
+
+    private void ViewCategories()
+    {
+        List<Category> categories = _categoryDataManager.GetCategories();
+        _displayData.ShowCategories(categories);
+        _userInput.PressToContinue();
     }
 }

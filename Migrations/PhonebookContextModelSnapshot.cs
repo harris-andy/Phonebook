@@ -8,8 +8,8 @@ using Phonebook;
 
 namespace Phonebook.Migrations
 {
-    [DbContext(typeof(ContactsContext))]
-    partial class ContactsContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(PhonebookContext))]
+    partial class PhonebookContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace Phonebook.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Phonebook.Contact", b =>

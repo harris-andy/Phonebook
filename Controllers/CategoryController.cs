@@ -12,7 +12,7 @@
 //         _userInput = userInput;
 //         _dataManager = dataManager;
 //     }
-//     internal void AddCategory()
+//     internal static void AddCategory()
 //     {
 //         Category category = new Category();
 //         category.Name = _userInput.GetName("category");

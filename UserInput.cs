@@ -32,7 +32,9 @@ public class UserInput
                     "1 - Add New Entry",
                     "2 - Delete Entry",
                     "3 - Update Entry",
-                    "4 - View Entries"
+                    "4 - View Entries",
+                    "5 - Add Category",
+                    "6 - View Categories"
                 ));
         int menuChoice = int.Parse(choice.Split('-')[0].Trim());
 
@@ -139,7 +141,8 @@ public class UserInput
                     "1 - Name",
                     "2 - Phone Number",
                     "3 - Email",
-                    "4 - Commit Changes"
+                    "4 - Category",
+                    "5 - Commit Changes"
                 ));
 
         return int.Parse(choice.Split('-')[0].Trim());

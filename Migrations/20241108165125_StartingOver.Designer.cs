@@ -9,9 +9,9 @@ using Phonebook;
 
 namespace Phonebook.Migrations
 {
-    [DbContext(typeof(ContactsContext))]
-    [Migration("20241108141942_Create-Category")]
-    partial class CreateCategory
+    [DbContext(typeof(PhonebookContext))]
+    [Migration("20241108165125_StartingOver")]
+    partial class StartingOver
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace Phonebook.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Phonebook.Contact", b =>

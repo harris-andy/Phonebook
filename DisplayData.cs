@@ -37,11 +37,12 @@ public class DisplayData
 
         table.BorderColor(Color.DarkSlateGray1);
         table.Border(TableBorder.Rounded);
+        table.Title("Contacts");
         table.AddColumn(new TableColumn("[cyan1]ID[/]").LeftAligned());
         table.AddColumn(new TableColumn("[green1]Name[/]").RightAligned());
         table.AddColumn(new TableColumn("[blue1]Phone Number[/]").RightAligned());
         table.AddColumn(new TableColumn("[yellow1]Email[/]").RightAligned());
-        // table.AddColumn(new TableColumn("[red1]% Correct[/]").LeftAligned());
+        table.AddColumn(new TableColumn("[red1]Category[/]").LeftAligned());
 
         foreach (Contact contact in contacts)
         {
@@ -50,7 +51,38 @@ public class DisplayData
                 $"[{color}]{contact.ContactId}[/]",
                 $"[{color}]{contact.Name}[/]",
                 $"[{color}]{contact.PhoneNumber}[/]",
-                $"[{color}]{contact.Email}[/]"
+                $"[{color}]{contact.Email}[/]",
+                $"[{color}]{contact.Category.Name}[/]"
+            );
+            isAlternateRow = !isAlternateRow;
+        }
+        Console.Clear();
+        AnsiConsole.Write(table);
+    }
+
+    public void ShowCategories(List<Category> categories)
+    {
+        var table = new Table();
+        bool isAlternateRow = false;
+
+        table.BorderColor(Color.DarkSlateGray1);
+        table.Border(TableBorder.Rounded);
+        table.Title("Categories");
+        table.AddColumn(new TableColumn("[cyan1]Category[/]").LeftAligned());
+        // table.AddColumn(new TableColumn("[green1]Name[/]").RightAligned());
+        // table.AddColumn(new TableColumn("[blue1]Phone Number[/]").RightAligned());
+        // table.AddColumn(new TableColumn("[yellow1]Email[/]").RightAligned());
+        // table.AddColumn(new TableColumn("[red1]Category[/]").LeftAligned());
+
+        foreach (Category category in categories)
+        {
+            var color = isAlternateRow ? "grey" : "blue";
+            table.AddRow(
+                $"[{color}]{category.Name}[/]"
+            // $"[{color}]{contact.Name}[/]",
+            // $"[{color}]{contact.PhoneNumber}[/]",
+            // $"[{color}]{contact.Email}[/]",
+            // $"[{color}]{contact.Category.Name}[/]"
             );
             isAlternateRow = !isAlternateRow;
         }
