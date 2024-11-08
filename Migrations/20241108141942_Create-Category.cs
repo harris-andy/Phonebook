@@ -12,7 +12,7 @@ namespace Phonebook.Migrations
         {
             migrationBuilder.AddColumn<int>(
                 name: "CategoryId",
-                table: "Persons",
+                table: "Contacts",
                 type: "INTEGER",
                 nullable: false,
                 defaultValue: 0);
@@ -31,13 +31,13 @@ namespace Phonebook.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Persons_CategoryId",
-                table: "Persons",
+                name: "IX_Contacts_CategoryId",
+                table: "Contacts",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Persons_Name",
-                table: "Persons",
+                name: "IX_Contacts_Name",
+                table: "Contacts",
                 column: "Name",
                 unique: true);
 
@@ -48,8 +48,8 @@ namespace Phonebook.Migrations
                 unique: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Persons_Category_CategoryId",
-                table: "Persons",
+                name: "FK_Contacts_Category_CategoryId",
+                table: "Contacts",
                 column: "CategoryId",
                 principalTable: "Category",
                 principalColumn: "CategoryId",
@@ -60,23 +60,23 @@ namespace Phonebook.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Persons_Category_CategoryId",
-                table: "Persons");
+                name: "FK_Contacts_Category_CategoryId",
+                table: "Contacts");
 
             migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropIndex(
-                name: "IX_Persons_CategoryId",
-                table: "Persons");
+                name: "IX_Contacts_CategoryId",
+                table: "Contacts");
 
             migrationBuilder.DropIndex(
-                name: "IX_Persons_Name",
-                table: "Persons");
+                name: "IX_Contacts_Name",
+                table: "Contacts");
 
             migrationBuilder.DropColumn(
                 name: "CategoryId",
-                table: "Persons");
+                table: "Contacts");
         }
     }
 }

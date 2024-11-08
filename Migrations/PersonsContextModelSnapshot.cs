@@ -8,8 +8,8 @@ using Phonebook;
 
 namespace Phonebook.Migrations
 {
-    [DbContext(typeof(PersonsContext))]
-    partial class PersonsContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ContactsContext))]
+    partial class ContactsContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -34,9 +34,9 @@ namespace Phonebook.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Phonebook.Person", b =>
+            modelBuilder.Entity("Phonebook.Contact", b =>
                 {
-                    b.Property<int>("PersonId")
+                    b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -55,20 +55,20 @@ namespace Phonebook.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("PersonId");
+                    b.HasKey("ContactId");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Persons");
+                    b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("Phonebook.Person", b =>
+            modelBuilder.Entity("Phonebook.Contact", b =>
                 {
                     b.HasOne("Phonebook.Category", "Category")
-                        .WithMany("Persons")
+                        .WithMany("Contacts")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -78,7 +78,7 @@ namespace Phonebook.Migrations
 
             modelBuilder.Entity("Phonebook.Category", b =>
                 {
-                    b.Navigation("Persons");
+                    b.Navigation("Contacts");
                 });
 #pragma warning restore 612, 618
         }

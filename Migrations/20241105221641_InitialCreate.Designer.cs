@@ -9,7 +9,7 @@ using Phonebook;
 
 namespace Phonebook.Migrations
 {
-    [DbContext(typeof(PersonsContext))]
+    [DbContext(typeof(ContactsContext))]
     [Migration("20241105221641_InitialCreate")]
     partial class InitialCreate
     {
@@ -19,9 +19,9 @@ namespace Phonebook.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
-            modelBuilder.Entity("Phonebook.Person", b =>
+            modelBuilder.Entity("Phonebook.Contact", b =>
                 {
-                    b.Property<int>("PersonId")
+                    b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -37,9 +37,9 @@ namespace Phonebook.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("PersonId");
+                    b.HasKey("ContactId");
 
-                    b.ToTable("Persons");
+                    b.ToTable("Contacts");
                 });
 #pragma warning restore 612, 618
         }
