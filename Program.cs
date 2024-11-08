@@ -4,6 +4,11 @@
 /*
     TO DO:
     - option to create a new category if one doesn't exist
+
+
+    QUESTIONS
+    - CategoryDataManager uses static functions (it was easier) but it's the only one - is that bad practice?
+    - "Virtual" keyword in Contact class
 */
 
 

@@ -48,7 +48,7 @@ public class PhonebookController
                     ViewCategories();
                     break;
                 case 7:
-                    // StudyReport("grades");
+                    DeleteCategory();
                     break;
                 case 8:
                     // AddFakeData();
@@ -135,10 +135,6 @@ public class PhonebookController
         } while (updateChoice != 0);
     }
 
-    // Contact updatedContact = _userInput.GetUpdatedContact(chosenOne);
-    // if (_userInput.BackToMainMenu()) ShowMainMenu();
-    // _dataManager.UpdateContact(updatedContact);
-
     internal void AddCategory()
     {
         Category category = new Category();
@@ -146,11 +142,11 @@ public class PhonebookController
         CategoryDataManager.AddCategory(category);
     }
 
-    // internal int GetCategoryId()
-    // {
-    //     List<Category> categories = CategoryDataManager.GetCategories();
-    //     return _userInput.GetCategoryId(categories);
-    // }
+    internal void DeleteCategory()
+    {
+        int categoryId = _userInput.GetCategoryId();
+        CategoryDataManager.RemoveCategory(categoryId);
+    }
 
     internal void ViewCategories()
     {

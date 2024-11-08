@@ -34,7 +34,8 @@ public class UserInput
                     "3 - Update Entry",
                     "4 - View Entries",
                     "5 - Add Category",
-                    "6 - View Categories"
+                    "6 - View Categories",
+                    "7 - Delete Category"
                 ));
         int menuChoice = int.Parse(choice.Split('-')[0].Trim());
 
