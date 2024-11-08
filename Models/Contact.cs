@@ -18,10 +18,10 @@ namespace Phonebook;
 // }
 
 [Index(nameof(Name), IsUnique = true)]
-public class Person
+public class Contact
 {
     [Key]
-    public int PersonId { get; set; }
+    public int ContactId { get; set; }
 
     [Required]
     public string Name { get; set; } = string.Empty;

@@ -8,10 +8,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Phonebook;
 
+[Index(nameof(Name), IsUnique = true)]
 public class Category
 {
     [Key]
     public int CategoryId { get; set; }
 
-    public List<Person> Persons { get; } = new();
+    public string Name { get; set; } = string.Empty;
+
+    public List<Contact> Contacts { get; } = new();
 }

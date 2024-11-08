@@ -121,3 +121,4 @@
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/Phonebook/bin/Debug/net8.0/runtimes/win-x64/native/e_sqlite3.dll
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/Phonebook/bin/Debug/net8.0/runtimes/win-x86/native/e_sqlite3.dll
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/Phonebook/bin/Debug/net8.0/libphonenumbers-dotnet.dll
+/Users/andrew/Sync/Programming/C#/cSharpAcademy/Phonebook/obj/Debug/net8.0/Phonebook.sourcelink.json

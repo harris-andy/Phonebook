@@ -102,25 +102,25 @@ public class UserInput
         return phoneNumberUtil.Format(phoneNumber, PhoneNumberFormat.INTERNATIONAL);
     }
 
-    internal Person GetPerson(List<Person> persons, string message)
+    internal Contact GetContact(List<Contact> contacts, string message)
     {
         Console.Clear();
-        Person chosenPerson = AnsiConsole.Prompt(
-            new SelectionPrompt<Person>()
+        Contact chosenContact = AnsiConsole.Prompt(
+            new SelectionPrompt<Contact>()
                 .Title(message)
-                .UseConverter(person => person.Name)
-                .AddChoices(persons));
+                .UseConverter(contact => contact.Name)
+                .AddChoices(contacts));
 
-        return chosenPerson;
+        return chosenContact;
     }
 
-    // internal Person GetUpdatedPerson(Person person)
+    // internal Contact GetUpdatedContact(Contact contact)
     // {
-    //     person.Name = AnsiConsole.Ask<string>($"Enter new name for {person.Name}: ");
-    //     person.Email = GetEmail();
-    //     person.PhoneNumber = GetPhoneNumber();
+    //     contact.Name = AnsiConsole.Ask<string>($"Enter new name for {contact.Name}: ");
+    //     contact.Email = GetEmail();
+    //     contact.PhoneNumber = GetPhoneNumber();
 
-    //     return person;
+    //     return contact;
     // }
 
     internal bool GetConfirmation(string message)
@@ -128,7 +128,7 @@ public class UserInput
         return AnsiConsole.Confirm(message);
     }
 
-    internal int ChoosePersonToUpdate()
+    internal int ChooseContactToUpdate()
     {
         // Console.Clear();
         string choice = AnsiConsole.Prompt(

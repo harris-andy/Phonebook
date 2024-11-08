@@ -30,7 +30,7 @@ public class DisplayData
     //     Console.WriteLine(menuBuilder.ToString());
     // }
 
-    public void ShowPersons(List<Person> persons)
+    public void ShowContacts(List<Contact> contacts)
     {
         var table = new Table();
         bool isAlternateRow = false;
@@ -43,14 +43,14 @@ public class DisplayData
         table.AddColumn(new TableColumn("[yellow1]Email[/]").RightAligned());
         // table.AddColumn(new TableColumn("[red1]% Correct[/]").LeftAligned());
 
-        foreach (Person person in persons)
+        foreach (Contact contact in contacts)
         {
             var color = isAlternateRow ? "grey" : "blue";
             table.AddRow(
-                $"[{color}]{person.PersonId}[/]",
-                $"[{color}]{person.Name}[/]",
-                $"[{color}]{person.PhoneNumber}[/]",
-                $"[{color}]{person.Email}[/]"
+                $"[{color}]{contact.ContactId}[/]",
+                $"[{color}]{contact.Name}[/]",
+                $"[{color}]{contact.PhoneNumber}[/]",
+                $"[{color}]{contact.Email}[/]"
             );
             isAlternateRow = !isAlternateRow;
         }

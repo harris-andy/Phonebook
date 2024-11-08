@@ -30,13 +30,13 @@ public class PhonebookController
                     Environment.Exit(0);
                     break;
                 case 1:
-                    AddPerson();
+                    AddContact();
                     break;
                 case 2:
-                    DeletePerson();
+                    DeleteContact();
                     break;
                 case 3:
-                    UpdatePerson();
+                    UpdateContact();
                     break;
                 case 4:
                     ViewRecords();
@@ -64,56 +64,56 @@ public class PhonebookController
         }
     }
 
-    private void AddPerson()
+    private void AddContact()
     {
         string name = _userInput.GetName();
         string email = _userInput.GetEmail();
         string countryCode = _userInput.GetCountryCode();
         string phoneNumber = _userInput.GetPhoneNumber();
 
-        // using var db = new PersonsContext();
-        // db.Add(new Person { Name = name, Email = email, PhoneNumber = phoneNumber });
+        // using var db = new ContactsContext();
+        // db.Add(new Contact { Name = name, Email = email, PhoneNumber = phoneNumber });
         // db.SaveChanges();
 
-        Person person = new Person { Name = name, Email = email, PhoneNumber = phoneNumber };
-        _dataManager.AddNewPerson(person);
+        Contact contact = new Contact { Name = name, Email = email, PhoneNumber = phoneNumber };
+        _dataManager.AddNewContact(contact);
     }
 
-    private void DeletePerson()
+    private void DeleteContact()
     {
-        List<Person> persons = _dataManager.GetEntries();
-        // _displayData.ShowPersons(persons);
+        List<Contact> contacts = _dataManager.GetEntries();
+        // _displayData.ShowContacts(contacts);
         // _displayData.PressToContinue();
-        string chooseMessage = "Choose person to be elminated: ";
+        string chooseMessage = "Choose contact to be elminated: ";
         // string name = _userInput.GetString(message);
-        Person chosenOne = _userInput.GetPerson(persons, chooseMessage);
-        List<Person> chosenList = new List<Person> { chosenOne };
-        _displayData.ShowPersons(chosenList);
-        string deleteMessage = "Are you sure you want to delete this person?";
+        Contact chosenOne = _userInput.GetContact(contacts, chooseMessage);
+        List<Contact> chosenList = new List<Contact> { chosenOne };
+        _displayData.ShowContacts(chosenList);
+        string deleteMessage = "Are you sure you want to delete this contact?";
         if (_userInput.GetConfirmation(deleteMessage))
-            _dataManager.DeletePerson(chosenOne);
+            _dataManager.DeleteContact(chosenOne);
 
     }
 
     private void ViewRecords()
     {
-        List<Person> persons = _dataManager.GetEntries();
-        _displayData.ShowPersons(persons);
+        List<Contact> contacts = _dataManager.GetEntries();
+        _displayData.ShowContacts(contacts);
         _userInput.PressToContinue();
     }
 
-    private void UpdatePerson()
+    private void UpdateContact()
     {
-        List<Person> persons = _dataManager.GetEntries();
-        string message = "Choose person to update: ";
-        Person chosenOne = _userInput.GetPerson(persons, message);
-        List<Person> chosenList = new List<Person> { chosenOne };
+        List<Contact> contacts = _dataManager.GetEntries();
+        string message = "Choose contact to update: ";
+        Contact chosenOne = _userInput.GetContact(contacts, message);
+        List<Contact> chosenList = new List<Contact> { chosenOne };
         int updateChoice;
 
         do
         {
-            _displayData.ShowPersons(chosenList);
-            updateChoice = _userInput.ChoosePersonToUpdate();
+            _displayData.ShowContacts(chosenList);
+            updateChoice = _userInput.ChooseContactToUpdate();
             Action performAction = updateChoice switch
             {
                 0 => () => ShowMainMenu(),
@@ -122,7 +122,7 @@ public class PhonebookController
                 3 => () => chosenOne.Email = _userInput.GetEmail(),
                 4 => () =>
                 {
-                    _dataManager.UpdatePerson(chosenOne);
+                    _dataManager.UpdateContact(chosenOne);
                     Console.WriteLine($"\nChanges committed!\n");
                     _userInput.PressToContinue();
                 }
@@ -132,8 +132,8 @@ public class PhonebookController
             performAction();
         } while (updateChoice != 0);
 
-        // Person updatedPerson = _userInput.GetUpdatedPerson(chosenOne);
+        // Contact updatedContact = _userInput.GetUpdatedContact(chosenOne);
         // if (_userInput.BackToMainMenu()) ShowMainMenu();
-        // _dataManager.UpdatePerson(updatedPerson);
+        // _dataManager.UpdateContact(updatedContact);
     }
 }
