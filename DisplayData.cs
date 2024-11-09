@@ -48,7 +48,7 @@ public class DisplayData
         table.AddColumn(new TableColumn("[yellow1]Email[/]").RightAligned());
         // table.AddColumn(new TableColumn("[red1]Category[/]").LeftAligned());
 
-        var rows = categories.SelectMany(category =>
+        var rows = categories.Select(category =>
                 (category.Contacts?.Any() ?? false)
                 ? category.Contacts.Select(contact =>
                     new[] { category.Name, contact.PhoneNumber, contact.Email })
