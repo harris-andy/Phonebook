@@ -3,9 +3,7 @@
 
 /*
     TO DO:
-    - option to create a new category if one doesn't exist
     - Create a functionality that allows users to add the contact's e-mail address and send an e-mail message from the app.
-    - Expand the app by creating categories of contacts (i.e. Family, Friends, Work, etc).
     - What if you want to send not only e-mails but SMS?
 
 

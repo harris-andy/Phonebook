@@ -4,32 +4,6 @@ namespace Phonebook;
 
 public class DisplayData
 {
-    // public void MainMenu()
-    // {
-    //     Console.Clear();
-    //     var menuBuilder = new System.Text.StringBuilder();
-
-    //     menuBuilder.AppendLine("--------------------------------------------------")
-    //                .AppendLine()
-    //                .AppendLine("\t\tMAIN MENU")
-    //                .AppendLine()
-    //                .AppendLine("\tWhat would you like to do?")
-    //                .AppendLine()
-    //                .AppendLine("\tType 0 to Close Application")
-    //                .AppendLine("\tType 1 to Add New Entry")
-    //                .AppendLine("\tType 2 to Delete Entry")
-    //                .AppendLine("\tType 3 to Update Entry")
-    //                .AppendLine("\tType 4 to View Entries")
-    //                //    .AppendLine("\tType 5 to View Study Sessions")
-    //                //    .AppendLine("\tType 6 to View Study Sessions COUNT by Month")
-    //                //    .AppendLine("\tType 7 to View Study Sessions GRADES by Month")
-    //                //    .AppendLine("\tType 8 to Add Fake Data")
-    //                //    .AppendLine("\tType 9 to Add Fake Study Sessions")
-    //                .AppendLine("--------------------------------------------------");
-
-    //     Console.WriteLine(menuBuilder.ToString());
-    // }
-
     public void ShowContacts(List<Contact> contacts)
     {
         var table = new Table();
@@ -69,34 +43,25 @@ public class DisplayData
         table.Border(TableBorder.Rounded);
         table.Title("Categories");
         table.AddColumn(new TableColumn("[cyan1]Category[/]").LeftAligned());
-        // table.AddColumn(new TableColumn("[green1]Name[/]").RightAligned());
-        // table.AddColumn(new TableColumn("[blue1]Phone Number[/]").RightAligned());
-        // table.AddColumn(new TableColumn("[yellow1]Email[/]").RightAligned());
+        table.AddColumn(new TableColumn("[green1]Name[/]").RightAligned());
+        table.AddColumn(new TableColumn("[blue1]Phone Number[/]").RightAligned());
+        table.AddColumn(new TableColumn("[yellow1]Email[/]").RightAligned());
         // table.AddColumn(new TableColumn("[red1]Category[/]").LeftAligned());
 
-        foreach (Category category in categories)
+        var rows = categories.SelectMany(category =>
+                (category.Contacts?.Any() ?? false)
+                ? category.Contacts.Select(contact =>
+                    new[] { category.Name, contact.PhoneNumber, contact.Email })
+                : new[]
+                    { new[] { category.Name, "--", "--", "--" } });
+
+        foreach (var row in rows)
         {
             var color = isAlternateRow ? "grey" : "blue";
-            table.AddRow(
-                $"[{color}]{category.Name}[/]"
-            // $"[{color}]{contact.Name}[/]",
-            // $"[{color}]{contact.PhoneNumber}[/]",
-            // $"[{color}]{contact.Email}[/]",
-            // $"[{color}]{contact.Category.Name}[/]"
-            );
+            table.AddRow(row.Select(cell => $"[{color}]{cell}[/]").ToArray());
             isAlternateRow = !isAlternateRow;
         }
         Console.Clear();
         AnsiConsole.Write(table);
     }
-
-    // internal void PressToContinue()
-    // {
-    //     Console.WriteLine($"Press a key to continue...");
-    //     Console.Read();
-    // }
-
-
-
 }
-

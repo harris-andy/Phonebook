@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Phonebook;
 
 public class CategoryDataManager
@@ -12,7 +14,10 @@ public class CategoryDataManager
     internal static List<Category> GetCategories()
     {
         using var db = new PhonebookContext();
-        return db.Categories.ToList();
+        var categories = db.Categories
+                .Include(c => c.Contacts)
+                .ToList();
+        return categories;
     }
 
     internal static void RemoveCategory(int categoryId)

@@ -11,5 +11,5 @@ public class Category
 
     public string Name { get; set; } = string.Empty;
 
-    public List<Contact> Contacts { get; set; } = new();
+    public virtual List<Contact> Contacts { get; set; } = default!;
 }
