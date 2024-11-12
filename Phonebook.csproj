@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="libphonenumbers-dotnet" Version="1.1.0" />
+    <PackageReference Include="MailKit" Version="2.5.0" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />

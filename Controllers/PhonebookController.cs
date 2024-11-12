@@ -1,3 +1,6 @@
+using MimeKit;
+using Phonebook.Data;
+
 namespace Phonebook;
 
 public class PhonebookController
@@ -53,7 +56,7 @@ public class PhonebookController
                     UpdateCategory();
                     break;
                 case 9:
-                    // AddFakeStudySessions();
+                    SendEmail();
                     break;
                 default:
                     Console.Clear();
@@ -162,5 +165,19 @@ public class PhonebookController
         Category category = _userInput.GetCategory();
         category.Name = _userInput.GetName("new category");
         CategoryDataManager.UpdateCategory(category);
+    }
+
+    internal void SendEmail()
+    {
+        var emailMessage = new MimeMessage();
+        emailMessage.From.Add(new MailboxAddress("hobobrawler@gmail.com"));
+        emailMessage.To.Add(new MailboxAddress("agharris@gmail.com"));
+        emailMessage.Subject = "What a fucking test!";
+        emailMessage.Body = new TextPart("plain")
+        {
+            Text = "It worked? Holy shit it worked!"
+        };
+
+        EmailDataManager.SendEmail(emailMessage);
     }
 }
