@@ -1,5 +1,6 @@
 using MimeKit;
 using Phonebook.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace Phonebook;
 
@@ -70,7 +71,7 @@ public class PhonebookController
     {
         Contact contact = new Contact();
         contact.Name = _userInput.GetName("contact");
-        contact.Email = _userInput.GetEmail();
+        contact.Email = _userInput.GetContactEmail();
         contact.PhoneNumber = _userInput.GetPhoneNumber();
         List<Category> categories = CategoryDataManager.GetCategories();
         if (categories.Count() == 0)
@@ -125,7 +126,7 @@ public class PhonebookController
                 0 => () => ShowMainMenu(),
                 1 => () => chosenOne.Name = _userInput.GetName("contact"),
                 2 => () => chosenOne.PhoneNumber = _userInput.GetPhoneNumber(),
-                3 => () => chosenOne.Email = _userInput.GetEmail(),
+                3 => () => chosenOne.Email = _userInput.GetContactEmail(),
                 4 => () => chosenOne.Category.Name = _userInput.GetName("category"),
                 5 => () =>
                 {
@@ -170,12 +171,13 @@ public class PhonebookController
     internal void SendEmail()
     {
         var emailMessage = new MimeMessage();
-        emailMessage.From.Add(new MailboxAddress("hobobrawler@gmail.com"));
-        emailMessage.To.Add(new MailboxAddress("agharris@gmail.com"));
-        emailMessage.Subject = "What a fucking test!";
+        List<string> emailDetails = _userInput.GetEmailDetails();
+        emailMessage.From.Add(new MailboxAddress(EmailDataManager._config["EmailSettings:Username"]));
+        emailMessage.To.Add(new MailboxAddress(emailDetails[0]));
+        emailMessage.Subject = emailDetails[1];
         emailMessage.Body = new TextPart("plain")
         {
-            Text = "It worked? Holy shit it worked!"
+            Text = emailDetails[2]
         };
 
         EmailDataManager.SendEmail(emailMessage);

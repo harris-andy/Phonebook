@@ -49,7 +49,7 @@ public class UserInput
         return AnsiConsole.Ask<string>($"Enter {type} name: ");
     }
 
-    public string GetEmail()
+    public string GetContactEmail()
     {
         string message = "Enter the email address. Format it like blahblah@blah.com: ";
 
@@ -180,5 +180,16 @@ public class UserInput
     {
         Console.WriteLine($"Press any key to continue...");
         Console.Read();
+    }
+
+    internal List<string> GetEmailDetails()
+    {
+        return new List<string>
+        {
+            // AnsiConsole.Ask<string>($"Enter From email address: "),
+            AnsiConsole.Ask<string>($"Enter To email address: "),
+            AnsiConsole.Ask<string>($"Enter email Subject: "),
+            AnsiConsole.Ask<string>($"Enter email Body: ")
+        };
     }
 }

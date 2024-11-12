@@ -1,20 +1,31 @@
 using MimeKit;
-using MailKit;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Configuration;
 
-namespace Phonebook.Data
+namespace Phonebook.Data;
+
+public class EmailDataManager
 {
-    public class EmailDataManager
+    internal static readonly IConfiguration _config;
+
+    static EmailDataManager()
     {
-        internal static void SendEmail(MimeMessage message)
+        _config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .Build();
+    }
+
+    internal static void SendEmail(MimeMessage message)
+    {
+        using (var client = new SmtpClient())
         {
-            using (var client = new SmtpClient())
-            {
-                client.Connect("smtp.gmail.com", 465, true);
-                client.Authenticate("hobobrawler@gmail.com", "htba epwk tztt pydq");
-                client.Send(message);
-                client.Disconnect(true);
-            }
+            var username = _config["EmailSettings:Username"];
+            var password = _config["EmailSettings:Password"];
+            client.Connect("smtp.gmail.com", 465, true);
+            client.Authenticate(username, password);
+            client.Send(message);
+            client.Disconnect(true);
         }
     }
 }
