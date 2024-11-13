@@ -169,7 +169,6 @@ public class UserInput
     {
         Console.WriteLine($"Press 0 to return to main menu");
         ConsoleKeyInfo button = Console.ReadKey(true);
-
         if (button.Key == ConsoleKey.NumPad0 || button.Key == ConsoleKey.D0)
             return true;
 
@@ -191,5 +190,17 @@ public class UserInput
             AnsiConsole.Ask<string>($"Enter email Subject: "),
             AnsiConsole.Ask<string>($"Enter email Body: ")
         };
+    }
+
+    internal bool Confirm(string prompt)
+    {
+        bool confirmation = false;
+        confirmation = AnsiConsole.Prompt(
+        new TextPrompt<bool>(prompt)
+            .AddChoice(true)
+            .AddChoice(false)
+            .WithConverter(choice => choice ? "y" : "n"));
+
+        return confirmation;
     }
 }

@@ -3,7 +3,6 @@
 
 /*
     TO DO:
-    - Create a functionality that allows users to add the contact's e-mail address and send an e-mail message from the app.
     - What if you want to send not only e-mails but SMS?
 
 

@@ -171,15 +171,21 @@ public class PhonebookController
     internal void SendEmail()
     {
         var emailMessage = new MimeMessage();
+        string userName = EmailDataManager._config["EmailSettings:Username"] ?? "N/A";
         List<string> emailDetails = _userInput.GetEmailDetails();
-        emailMessage.From.Add(new MailboxAddress(EmailDataManager._config["EmailSettings:Username"]));
-        emailMessage.To.Add(new MailboxAddress(emailDetails[0]));
-        emailMessage.Subject = emailDetails[1];
-        emailMessage.Body = new TextPart("plain")
-        {
-            Text = emailDetails[2]
-        };
+        _displayData.ShowEmail(emailDetails, userName);
 
-        EmailDataManager.SendEmail(emailMessage);
+        if (_userInput.Confirm("Confirm to send email draft:"))
+        {
+            emailMessage.From.Add(new MailboxAddress(userName));
+            emailMessage.To.Add(new MailboxAddress(emailDetails[0]));
+            emailMessage.Subject = emailDetails[1];
+            emailMessage.Body = new TextPart("plain")
+            {
+                Text = emailDetails[2]
+            };
+
+            EmailDataManager.SendEmail(emailMessage);
+        }
     }
 }

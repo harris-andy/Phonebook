@@ -4,7 +4,7 @@ namespace Phonebook;
 
 public class DisplayData
 {
-    public void ShowContacts(List<Contact> contacts)
+    internal void ShowContacts(List<Contact> contacts)
     {
         var table = new Table();
         bool isAlternateRow = false;
@@ -34,7 +34,7 @@ public class DisplayData
         AnsiConsole.Write(table);
     }
 
-    public void ShowCategories(List<Category> categories)
+    internal void ShowCategories(List<Category> categories)
     {
         var table = new Table();
         bool isAlternateRow = false;
@@ -61,6 +61,36 @@ public class DisplayData
             table.AddRow(row.Select(cell => $"[{color}]{cell}[/]").ToArray());
             isAlternateRow = !isAlternateRow;
         }
+        Console.Clear();
+        AnsiConsole.Write(table);
+    }
+
+    internal void ShowEmail(List<string> email, string userName)
+    {
+        var table = new Table();
+        bool isAlternateRow = false;
+
+        table.BorderColor(Color.DarkSlateGray1);
+        table.Border(TableBorder.Rounded);
+        table.Title("Email Draft");
+        table.AddColumn(new TableColumn("[cyan1]From[/]").LeftAligned());
+        table.AddColumn(new TableColumn("[green1]To[/]").RightAligned());
+        table.AddColumn(new TableColumn("[blue1]Subject[/]").RightAligned());
+        table.AddColumn(new TableColumn("[yellow1]Body[/]").RightAligned());
+        // table.AddColumn(new TableColumn("[red1]Category[/]").LeftAligned());
+
+        // foreach (string email in emailDetails)
+        // {
+        var color = isAlternateRow ? "grey" : "blue";
+        table.AddRow(
+            $"[{color}]{userName}[/]",
+            $"[{color}]{email[0]}[/]",
+            $"[{color}]{email[1]}[/]",
+            $"[{color}]{email[2]}[/]"
+        // $"[{color}]{contact.Category.Name}[/]"
+        );
+        isAlternateRow = !isAlternateRow;
+        // }
         Console.Clear();
         AnsiConsole.Write(table);
     }
