@@ -2,6 +2,8 @@ using Spectre.Console;
 using System.Net.Mail;
 using PhoneNumbers;
 using System.Globalization;
+using Phonebook.Models;
+using Phonebook.Data;
 
 namespace Phonebook;
 
@@ -181,15 +183,23 @@ public class UserInput
         Console.Read();
     }
 
-    internal List<string> GetEmailDetails()
+    internal Email GetEmailDetails()
     {
-        return new List<string>
-        {
-            // AnsiConsole.Ask<string>($"Enter From email address: "),
+        Email email = new Email(
+            EmailDataManager._config["EmailSettings:Username"] ?? "N/A",
             AnsiConsole.Ask<string>($"Enter To email address: "),
             AnsiConsole.Ask<string>($"Enter email Subject: "),
             AnsiConsole.Ask<string>($"Enter email Body: ")
-        };
+        );
+
+        // return new List<string>
+        // {
+        //     // AnsiConsole.Ask<string>($"Enter From email address: "),
+        //     AnsiConsole.Ask<string>($"Enter To email address: "),
+        //     AnsiConsole.Ask<string>($"Enter email Subject: "),
+        //     AnsiConsole.Ask<string>($"Enter email Body: ")
+        // };
+        return email;
     }
 
     internal bool Confirm(string prompt)

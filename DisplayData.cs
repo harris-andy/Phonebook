@@ -1,3 +1,4 @@
+using Phonebook.Models;
 using Spectre.Console;
 
 namespace Phonebook;
@@ -49,7 +50,7 @@ public class DisplayData
         // table.AddColumn(new TableColumn("[red1]Category[/]").LeftAligned());
 
         var rows = categories.SelectMany(category =>
-                (category.Contacts?.Any() ?? false)
+                category.Contacts.Any()
                 ? category.Contacts.Select(contact =>
                     new[] { category.Name, contact.PhoneNumber, contact.Email })
                 : new[]
@@ -65,7 +66,7 @@ public class DisplayData
         AnsiConsole.Write(table);
     }
 
-    internal void ShowEmail(List<string> email, string userName)
+    internal void ShowEmail(Email email)
     {
         var table = new Table();
         bool isAlternateRow = false;
@@ -83,10 +84,10 @@ public class DisplayData
         // {
         var color = isAlternateRow ? "grey" : "blue";
         table.AddRow(
-            $"[{color}]{userName}[/]",
-            $"[{color}]{email[0]}[/]",
-            $"[{color}]{email[1]}[/]",
-            $"[{color}]{email[2]}[/]"
+            $"[{color}]{email.FromAddress}[/]",
+            $"[{color}]{email.ToAddress}[/]",
+            $"[{color}]{email.Subject}[/]",
+            $"[{color}]{email.Body}[/]"
         // $"[{color}]{contact.Category.Name}[/]"
         );
         isAlternateRow = !isAlternateRow;

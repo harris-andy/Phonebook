@@ -1,6 +1,7 @@
 using MimeKit;
 using Phonebook.Data;
 using Microsoft.Extensions.Configuration;
+using Phonebook.Models;
 
 namespace Phonebook;
 
@@ -171,18 +172,18 @@ public class PhonebookController
     internal void SendEmail()
     {
         var emailMessage = new MimeMessage();
-        string userName = EmailDataManager._config["EmailSettings:Username"] ?? "N/A";
-        List<string> emailDetails = _userInput.GetEmailDetails();
-        _displayData.ShowEmail(emailDetails, userName);
+        // string userName = EmailDataManager._config["EmailSettings:Username"] ?? "N/A";
+        Email email = _userInput.GetEmailDetails();
+        _displayData.ShowEmail(email);
 
         if (_userInput.Confirm("Confirm to send email draft:"))
         {
-            emailMessage.From.Add(new MailboxAddress(userName));
-            emailMessage.To.Add(new MailboxAddress(emailDetails[0]));
-            emailMessage.Subject = emailDetails[1];
+            emailMessage.From.Add(new MailboxAddress(email.FromAddress));
+            emailMessage.To.Add(new MailboxAddress(email.ToAddress));
+            emailMessage.Subject = email.Subject;
             emailMessage.Body = new TextPart("plain")
             {
-                Text = emailDetails[2]
+                Text = email.Body
             };
 
             EmailDataManager.SendEmail(emailMessage);
