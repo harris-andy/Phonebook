@@ -30,37 +30,29 @@ This is my submission for the cSharpAcademy Phonebook project found here: [Phone
 ## Features
 - Make a phonebook. Neat!
 - Add names, phone numbers, emails and categories (what's up one-to-many)! WOW!
-- Send email to a contact
 
 
-![flash card](/Images/flashcard.png)
+![contacts](/Images/contacts.png)
 
 
-- Get summary records by year
+- Send an email through the console. What an age to be alive!
 
 
-![summary year](/Images/fcsummary.png)
-
-
-- View study session history by subject
-
-
-![study session history](/Images/studysessions.png)
+![email draft](/Images/email.png)
 
 
 ## More to do
-- UI formatting could use some work.
-- The year summary function in the DisplayData class is clunky but I couldn't figure out how to make it more dynamic and shorter.
+- I'd like to improve the method calls between the controller and other classes.
+- I need practice handling many-to-many relationships which weren't included in this project.
+- I didn't add SMS capabilities because it required an Azure Data account and the page had technical problems.
 
 
 ## New Stuff & Things I Learned. Neat!
-- First time using SQL Server, Azure Data Studio and Docker (that was fun to set up...)
-- Added a Controller class to improve design (finally got away from using "static" on everything)
-- Using DTOs
-- Whatever version of switch statements these are called. Much better than massive If statements!
+- Entity Framework is quite handy. Very cool abstraction of SQL queries.
+- Sending emails through MailKit is surprisingly easy (and very cool).
 
 
 ## Questions & Comments
-- I used AI for some of the table styling. I can't stand UI design so I gave up and let Claude make it pretty.
-- I tried to improve my organization but would appreciate any suggestions for improvement.
-- Should I add "bin/Debug/net8.0" and ".vscode" to the gitignore?
+- I'm still working on organization. When it got to the final refactoring, I found myself kind of stuck figuring out how to call methods outside the controller without making everything static.
+- I chose to use one Controller because it makes sense to me. I like having one location for all user interactions.
+- CategoryDataManager uses static functions (it was easier) but it's the only one - is that bad practice?

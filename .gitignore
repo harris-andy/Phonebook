@@ -1,3 +1,4 @@
 .vscode/
 appsettings.json
 Images/
+Controllers/CategoryController.cs
