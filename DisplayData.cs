@@ -52,7 +52,7 @@ public class DisplayData
         var rows = categories.SelectMany(category =>
                 category.Contacts.Any()
                 ? category.Contacts.Select(contact =>
-                    new[] { category.Name, contact.PhoneNumber, contact.Email })
+                    new[] { category.Name, contact.Name, contact.PhoneNumber, contact.Email })
                 : new[]
                     { new[] { category.Name, "--", "--", "--" } });
 

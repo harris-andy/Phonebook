@@ -5,20 +5,32 @@ This is my submission for the cSharpAcademy Phonebook project found here: [Phone
 
 ## Project Description
 - A small console app in which the user can create a phonebook of contacts (name, phone number, email), create contact categories and send emails through the console. Data is stored through SQL Server.
+- Phone number formatting is verified using libphonenumbers-dotnet. Email formatting verified with MailKit.
+- Sending email handled using MimeKit and MailKit
 - Built with C#/.Net 8, Entity Framework, SQL Server, Spectre Console, Azure Data Studio, Docker 
 
 
 ## Usage
 - Follow the instructions and away you go
-- i.e. Select from the menu to perform operations such as: adding/deleting/updating/viewing contacts and categories or sending an email.
+- Select from the menu to perform operations such as: adding/deleting/updating/viewing contacts and categories or sending an email.
+
 
 ![main menu](/Images/mainMenu.png)
 
 
+## Email Setup
+- create "appsettings.json" in root folder (where .csproj exists)
+- add email object with your email and password in show in image:
+- note that for Gmail an app passkey is required, NOT your standard login password
+
+
+![email setup](/Images/emailSetup.png)
+
+
 ## Features
-- Study flash cards. User's score is recorded in the database.
-- Data is pulled through DTOs (where needed).
-- Options to add fake flash cards, stacks and study sessions (ChatGPT helped with this SQL, it's a bit out of my pay grade).
+- Make a phonebook. Neat!
+- Add names, phone numbers, emails and categories (what's up one-to-many)! WOW!
+- Send email to a contact
 
 
 ![flash card](/Images/flashcard.png)

@@ -69,22 +69,23 @@ public class PhonebookController
 
     private void AddContact()
     {
-        Contact contact = new Contact();
-        contact.Name = _userInput.GetName("contact");
-        contact.Email = _userInput.GetContactEmail();
-        contact.PhoneNumber = _userInput.GetPhoneNumber();
+        Contact contact = new Contact
+        {
+            Name = _userInput.GetName("contact"),
+            Email = _userInput.GetContactEmail(),
+            PhoneNumber = _userInput.GetPhoneNumber()
+        };
+
         List<Category> categories = CategoryDataManager.GetCategories();
-        if (categories.Count() == 0)
-            AddCategory();
-        contact.CategoryId = _userInput.GetCategory().CategoryId;
+        Category category = categories.Any() ? _userInput.GetCategory() : AddCategory();
 
+        if (category.Name == "Create a new category")
+            category = AddCategory();
 
-        // using var db = new ContactsContext();
-        // db.Add(new Contact { Name = name, Email = email, PhoneNumber = phoneNumber });
-        // db.SaveChanges();
-
-        // Contact contact = new Contact { Name = name, Email = email, PhoneNumber = phoneNumber };
+        contact.CategoryId = category.CategoryId;
         _dataManager.AddNewContact(contact);
+        Console.WriteLine($"Contact added");
+        _userInput.PressToContinue();
     }
 
     private void DeleteContact()
@@ -142,11 +143,12 @@ public class PhonebookController
         } while (updateChoice != 0);
     }
 
-    internal void AddCategory()
+    internal Category AddCategory()
     {
         Category category = new Category();
         category.Name = _userInput.GetName("category");
         CategoryDataManager.AddCategory(category);
+        return category;
     }
 
     internal void DeleteCategory()
@@ -180,8 +182,14 @@ public class PhonebookController
 
     internal void SendEmail()
     {
+        List<Contact> contacts = _dataManager.GetContacts();
+        if (contacts.Count() == 0)
+            NothingFound("contacts");
+        Contact emailReceiver = _userInput.GetContact(contacts, "Choose contact to send an email");
+
         var emailMessage = new MimeMessage();
         Email email = _userInput.GetEmailDetails();
+        email.ToAddress = emailReceiver.Email;
         _displayData.ShowEmail(email);
 
         if (_userInput.Confirm("Confirm to send email draft:"))

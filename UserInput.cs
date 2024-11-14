@@ -34,7 +34,7 @@ public class UserInput
                     "1 - Add New Contact",
                     "2 - Delete Contact",
                     "3 - Update Contact",
-                    "4 - View Entries",
+                    "4 - View Contacts",
                     "5 - Add Category",
                     "6 - View Categories",
                     "7 - Delete Category",
@@ -125,6 +125,7 @@ public class UserInput
     {
         Console.Clear();
         List<Category> categories = CategoryDataManager.GetCategories();
+        categories.Add(new Category { Name = "Create a new category" });
         Category category = AnsiConsole.Prompt(
             new SelectionPrompt<Category>()
                 .Title("Choose a category: ")
@@ -185,7 +186,7 @@ public class UserInput
     {
         Email email = new Email(
             EmailDataManager._config["EmailSettings:Username"] ?? "N/A",
-            GetContactEmail(),
+            "",
             AnsiConsole.Ask<string>($"Enter email Subject: "),
             AnsiConsole.Ask<string>($"Enter email Body: ")
         );
