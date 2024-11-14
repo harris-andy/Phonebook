@@ -9,20 +9,6 @@ namespace Phonebook;
 
 public class UserInput
 {
-    // public int GetMenuChoice(int start, int end, string text)
-    // {
-    //     int menuChoice = AnsiConsole.Prompt(
-    //     new TextPrompt<int>(text)
-    //     .Validate((n) =>
-    //     {
-    //         if (start <= n && n <= end)
-    //             return ValidationResult.Success();
-    //         else
-    //             return ValidationResult.Error($"[red]Pick a valid option[/]");
-    //     }));
-    //     return menuChoice;
-    // }
-
     public int MainMenu()
     {
         Console.Clear();
@@ -134,15 +120,6 @@ public class UserInput
         return category;
     }
 
-    // internal Contact GetUpdatedContact(Contact contact)
-    // {
-    //     contact.Name = AnsiConsole.Ask<string>($"Enter new name for {contact.Name}: ");
-    //     contact.Email = GetEmail();
-    //     contact.PhoneNumber = GetPhoneNumber();
-
-    //     return contact;
-    // }
-
     internal bool GetConfirmation(string message)
     {
         return AnsiConsole.Confirm(message);
@@ -150,7 +127,6 @@ public class UserInput
 
     internal int ChooseContactToUpdate()
     {
-        // Console.Clear();
         string choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Choose what to change:")
@@ -190,14 +166,6 @@ public class UserInput
             AnsiConsole.Ask<string>($"Enter email Subject: "),
             AnsiConsole.Ask<string>($"Enter email Body: ")
         );
-
-        // return new List<string>
-        // {
-        //     // AnsiConsole.Ask<string>($"Enter From email address: "),
-        //     AnsiConsole.Ask<string>($"Enter To email address: "),
-        //     AnsiConsole.Ask<string>($"Enter email Subject: "),
-        //     AnsiConsole.Ask<string>($"Enter email Body: ")
-        // };
         return email;
     }
 

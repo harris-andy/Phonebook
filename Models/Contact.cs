@@ -4,13 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Phonebook;
 
-// public class Category
-// {
-//     [Key]
-//     public int CategoryId { get; set; }
-
-//     public List<Person> Persons { get; } = new();
-// }
 
 [Index(nameof(Name), IsUnique = true)]
 public class Contact

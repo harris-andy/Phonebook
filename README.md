@@ -41,12 +41,10 @@ This is my submission for the cSharpAcademy Phonebook project found here: [Phone
 ![email draft](/Images/email.png)
 
 
-
 ## More to do
 - I'd like to improve the method calls between the controller and other classes.
 - I need practice handling many-to-many relationships which weren't included in this project.
 - I didn't add SMS capabilities because it required an Azure Data account and the page had technical problems.
-
 
 
 ## New Stuff & Things I Learned. Neat!
@@ -54,8 +52,8 @@ This is my submission for the cSharpAcademy Phonebook project found here: [Phone
 - Sending emails through MailKit is surprisingly easy (and very cool).
 
 
-
 ## Questions & Comments
 - I'm still working on organization. When it got to the final refactoring, I found myself kind of stuck figuring out how to call methods outside the controller without making everything static.
 - I chose to use one Controller because it makes sense to me. I like having one location for all user interactions.
 - CategoryDataManager uses static functions (it was easier) but it's the only one - is that bad practice?
+- Should the database migrations folder be added to gitignore?
