@@ -1,6 +1,5 @@
 using MimeKit;
 using Phonebook.Data;
-using Microsoft.Extensions.Configuration;
 using Phonebook.Models;
 
 namespace Phonebook;
@@ -91,10 +90,9 @@ public class PhonebookController
     private void DeleteContact()
     {
         List<Contact> contacts = _dataManager.GetContacts();
-        // _displayData.ShowContacts(contacts);
-        // _displayData.PressToContinue();
+        if (contacts.Count() == 0)
+            NothingFound("contacts");
         string chooseMessage = "Choose contact to be elminated: ";
-        // string name = _userInput.GetString(message);
         Contact chosenOne = _userInput.GetContact(contacts, chooseMessage);
         List<Contact> chosenList = new List<Contact> { chosenOne };
         _displayData.ShowContacts(chosenList);
@@ -113,6 +111,8 @@ public class PhonebookController
     private void UpdateContact()
     {
         List<Contact> contacts = _dataManager.GetContacts();
+        if (contacts.Count() == 0)
+            NothingFound("contacts");
         string message = "Choose contact to update: ";
         Contact chosenOne = _userInput.GetContact(contacts, message);
         List<Contact> chosenList = new List<Contact> { chosenOne };
@@ -151,7 +151,13 @@ public class PhonebookController
 
     internal void DeleteCategory()
     {
-        int categoryId = _userInput.GetCategory().CategoryId;
+        int categoryId;
+        List<Category> categories = CategoryDataManager.GetCategories();
+        if (categories.Count() == 1)
+            categoryId = categories.First().CategoryId;
+        if (categories.Count() == 0)
+            NothingFound("categories");
+        categoryId = _userInput.GetCategory().CategoryId;
         CategoryDataManager.RemoveCategory(categoryId);
     }
 
@@ -164,6 +170,9 @@ public class PhonebookController
 
     internal void UpdateCategory()
     {
+        List<Category> categories = CategoryDataManager.GetCategories();
+        if (categories.Count() == 0)
+            NothingFound("categories");
         Category category = _userInput.GetCategory();
         category.Name = _userInput.GetName("new category");
         CategoryDataManager.UpdateCategory(category);
@@ -172,7 +181,6 @@ public class PhonebookController
     internal void SendEmail()
     {
         var emailMessage = new MimeMessage();
-        // string userName = EmailDataManager._config["EmailSettings:Username"] ?? "N/A";
         Email email = _userInput.GetEmailDetails();
         _displayData.ShowEmail(email);
 
@@ -185,8 +193,14 @@ public class PhonebookController
             {
                 Text = email.Body
             };
-
             EmailDataManager.SendEmail(emailMessage);
         }
+    }
+
+    internal void NothingFound(string item)
+    {
+        Console.WriteLine($"No {item} exist.\n");
+        _userInput.PressToContinue();
+        ShowMainMenu();
     }
 }

@@ -31,9 +31,9 @@ public class UserInput
                 .Title("Choose an option:")
                 .AddChoices(
                     "0 - Exit Application",
-                    "1 - Add New Entry",
-                    "2 - Delete Entry",
-                    "3 - Update Entry",
+                    "1 - Add New Contact",
+                    "2 - Delete Contact",
+                    "3 - Update Contact",
                     "4 - View Entries",
                     "5 - Add Category",
                     "6 - View Categories",
@@ -53,7 +53,7 @@ public class UserInput
 
     public string GetContactEmail()
     {
-        string message = "Enter the email address. Format it like blahblah@blah.com: ";
+        string message = "Enter a valid email address (in format: example@example.com): ";
 
         string nameChoice = AnsiConsole.Prompt(
         new TextPrompt<string>(message)
@@ -125,8 +125,6 @@ public class UserInput
     {
         Console.Clear();
         List<Category> categories = CategoryDataManager.GetCategories();
-        if (categories.Count() == 1)
-            return categories.First();
         Category category = AnsiConsole.Prompt(
             new SelectionPrompt<Category>()
                 .Title("Choose a category: ")
@@ -187,7 +185,7 @@ public class UserInput
     {
         Email email = new Email(
             EmailDataManager._config["EmailSettings:Username"] ?? "N/A",
-            AnsiConsole.Ask<string>($"Enter To email address: "),
+            GetContactEmail(),
             AnsiConsole.Ask<string>($"Enter email Subject: "),
             AnsiConsole.Ask<string>($"Enter email Body: ")
         );
