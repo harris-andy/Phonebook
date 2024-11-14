@@ -41,15 +41,18 @@ This is my submission for the cSharpAcademy Phonebook project found here: [Phone
 ![email draft](/Images/email.png)
 
 
+
 ## More to do
 - I'd like to improve the method calls between the controller and other classes.
 - I need practice handling many-to-many relationships which weren't included in this project.
 - I didn't add SMS capabilities because it required an Azure Data account and the page had technical problems.
 
 
+
 ## New Stuff & Things I Learned. Neat!
 - Entity Framework is quite handy. Very cool abstraction of SQL queries.
 - Sending emails through MailKit is surprisingly easy (and very cool).
+
 
 
 ## Questions & Comments
