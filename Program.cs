@@ -1,17 +1,5 @@
 ﻿using Phonebook;
 
-
-/*
-    TO DO:
-    - What if you want to send not only e-mails but SMS?
-
-
-    QUESTIONS
-    - CategoryDataManager uses static functions (it was easier) but it's the only one - is that bad practice?
-    - "Virtual" keyword in Contact class
-*/
-
-
 internal class Program
 {
     private static void Main(string[] args)
