@@ -18,13 +18,14 @@ This is my submission for the cSharpAcademy Phonebook project found here: [Phone
 ![main menu](/Images/mainMenu.png)
 
 
-## Email Setup
+## Appsettings.json Setup
 - create "appsettings.json" in root folder (where .csproj exists)
-- add email object with your email and password in show in image:
+- add email object with your email and password as shown in image:
 - note that for Gmail an app passkey is required, NOT your standard login password
+- include your connection string with database login and password
 
 
-![email setup](/Images/emailSetup.png)
+![email setup](/Images/appsettings.png)
 
 
 ## Features

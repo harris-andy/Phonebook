@@ -84,6 +84,7 @@ public class PhonebookController
 
         contact.CategoryId = category.CategoryId;
         _dataManager.AddNewContact(contact);
+        Console.Clear();
         Console.WriteLine($"Contact added");
         _userInput.PressToContinue();
     }
